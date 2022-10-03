@@ -1,4 +1,37 @@
-N = int(input())
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+pList = [int(input()) for _ in range(n)]
+stack = []
+answer = []
+flag = True
+num = 1
+
+for i in range(n):
+    target = pList[i]
+    if target >= num:   # target이 num보다 큰 경우
+        while target >= num:
+            stack.append(num)
+            answer.append("+")
+            num += 1
+        stack.pop()
+        answer.append("-")
+    else: # num이 target보다 큰 경우, stack[-1] 값과 비교해야함
+        if stack and stack[-1] > target:
+            print("NO")
+            flag = False
+            break
+        while stack and target == stack[-1]:
+            stack.pop()
+            answer.append("-")
+
+if flag:
+    for a in answer:
+        print(a)
+
+"""
+N= int(input())
 A = [0]*N
 
 for i in range(N):
@@ -30,8 +63,7 @@ for i in range(N):
 if result:
     print(answer)
 
-
-"""
+----------------------------------------------------------------
 import sys
 
 def solution(data):
