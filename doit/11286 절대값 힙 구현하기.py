@@ -13,4 +13,3 @@ for x in data:
         print(num[1])
     elif x == 0 and not heap:
         print(0)
-
