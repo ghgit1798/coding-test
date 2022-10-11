@@ -1,13 +1,17 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())
-myList = [int(input()) for _ in range(n)]
+N = int(input())
+A = []
 
-for j in range(n-1):
-    for i in range(n-j-1):
-        if myList[i] > myList[i+1]:
-            myList[i], myList[i+1] = myList[i+1], myList[i]
+for i in range(N):
+    A.append((int(input()), i))
 
-for a in myList:
-    print(a)
+Max = 0
+sorted_A = sorted(A)
+
+for i in range(N):
+    if Max < sorted_A[i][1] - i:
+        Max = sorted_A[i][1] - i
+
+print(Max + 1)
