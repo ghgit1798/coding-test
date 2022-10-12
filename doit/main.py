@@ -1,17 +1,10 @@
-import sys
-input = sys.stdin.readline
+myList = list(map(int, input()))
 
-N = int(input())
-A = []
+for i in range(len(myList)):
+    Max = i
+    for j in range(i+1, len(myList)):
+        if myList[Max] < myList[j]:
+            Max = j
+    myList[Max], myList[i] = myList[i], myList[Max]
 
-for i in range(N):
-    A.append((int(input()), i))
-
-Max = 0
-sorted_A = sorted(A)
-
-for i in range(N):
-    if Max < sorted_A[i][1] - i:
-        Max = sorted_A[i][1] - i
-
-print(Max + 1)
+print("".join(map(str, myList)))
