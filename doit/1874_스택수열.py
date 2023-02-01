@@ -2,6 +2,33 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
+nList = [int(input()) for _ in range(n)]
+stack = []
+answer = []
+topN = 0
+
+for num in nList:
+    if stack and stack[-1] > num:
+        print("NO")
+        break
+    if topN <= num:
+        for i in range(topN+1, num+1):
+            answer.append("+")
+            stack.append(i)
+        topN = stack.pop()
+        answer.append("-")
+    else:
+        print("NO")
+        break
+
+for a in answer:
+    print(a)
+
+'''
+import sys
+input = sys.stdin.readline
+
+n = int(input())
 pList = [int(input()) for _ in range(n)]
 stack = []
 answer = []
@@ -29,6 +56,8 @@ for i in range(n):
 if flag:
     for a in answer:
         print(a)
+
+'''
 
 """
 N= int(input())

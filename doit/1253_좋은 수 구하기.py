@@ -7,6 +7,7 @@ L.sort()
 answer = 0
 
 for k in range(n):
+
     find = L[k]
     i, j = 0, n-1
     while i < j:

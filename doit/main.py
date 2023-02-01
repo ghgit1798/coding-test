@@ -1,30 +1,16 @@
 import sys
 input = sys.stdin.readline
-answer = 0
+suNo, quizNo = map(int, input().split())
+numbers = list(map(int, input().split()))
+prefix_sum = [0]
+temp = 0
 
-def merge_sort(arr):
-    global answer
-    if len(arr) < 2:
-        return arr
-    mid = len(arr) // 2
-    low_arr = merge_sort(arr[:mid])
-    high_arr = merge_sort(arr[mid:])
+for i in numbers:
+    temp = temp + i
+    prefix_sum.append(temp) # 합 배열 만들기
 
-    merged_arr = []
-    l = h = 0
-    while l < len(low_arr) and h < len(high_arr):
-        if low_arr[l][0] < high_arr[h][0]:
-            merged_arr.append(low_arr[l])
-            l += 1
-        else:
-            merged_arr.append(high_arr[h])
-            h += 1
+for i in range(quizNo):
+    s, e = map(int, input().split())
+    print(prefix_sum[e] - prefix_sum[s-1]) # 합 배열에서 구간 합 구하기
 
-    merged_arr += low_arr[l:]
-    merged_arr += high_arr[h:]
-    return merged_arr
 
-n = int(input())
-L = list(map(int, input().split()))
-L = [(L[i], i) for i in range(n)]
-result = merge_sort(L)
