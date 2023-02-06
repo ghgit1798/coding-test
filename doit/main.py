@@ -1,19 +1,21 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
-count = 1
-start_index = 1
-end_index = 1
-sum = 1
+m = int(input())
+A = list(map(int, input().split()))
+A.sort()
+cnt = 0
+i, j = 0,n-1
 
-while end_index != n:
-    if sum == n:
-        count += 1
-        end_index += 1
-        sum += end_index
-    elif sum > n:
-        sum -= start_index
-        start_index += 1
+while i < j:
+    if A[i]+A[j] < m:
+        i += 1
+    elif A[i]+A[j] > m:
+        j -= 1
     else:
-        end_index += 1
-        sum += end_index
+        cnt += 1
+        i += 1
+        j -= 1
 
-print(count)
+print(cnt)
