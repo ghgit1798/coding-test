@@ -46,7 +46,7 @@ A = list(input())
 checkList = list(map(int, input().split()))
 
 for i in range(4):
-    if checkList[i] == 0:
+    if checkList[1] == 0:
         checkSecret += 1
 
 for i in range(P):  # 초기 P부부 문자열 처리 부분
