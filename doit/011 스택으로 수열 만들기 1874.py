@@ -17,7 +17,7 @@ for i in range(N):
             num += 1
             answer += "+\n"
         stack.pop()
-        answer += "-\n"
+        answer += "+\n"
     else:   # 현재 수열값 < 오름차순 자연수 : pop()을 수행해 수열 원소 꺼냄
         n = stack.pop()
         # 스택의 가장 위의 수가 만들어야 하는 수열의 수보다 크면 수열을 ㅜㄹ력할 수 없음
