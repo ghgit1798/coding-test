@@ -7,4 +7,4 @@ while n != 0:
         cnt = cnt + n//coin
         n = n%coin
 
-print(cnt)g
+print(cnt)
