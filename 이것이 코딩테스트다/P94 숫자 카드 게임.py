@@ -1,3 +1,14 @@
+# 답안1
+n, m = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(n)]
+answer = 0
+
+for g in graph:
+    answer = max(answer, min(g))
+
+print(answer)
+
+# 답안2
 n, m = map(int, input().split())
 
 result = 0
