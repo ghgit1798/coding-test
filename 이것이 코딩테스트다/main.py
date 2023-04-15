@@ -1,12 +1,13 @@
-n, m = map(int, input().split())
+n, k = map(int, input().split())
+cnt = 0
 
-result = 0
-# 한 줄씩 입력받아 확인
-for i in range(n):
-    data = list(map(int, input().split()))
-    # 현재 줄에서 가장 작은 수 찾기
-    min_value = min(data)
-    # '가장 작은 수'들 중에서 가장 큰 수 찾기
-    result = max(result, min_value)
+while n != 1:
+    if n % k == 0:
+        n = n / k
+        cnt += 1
+    else:
+        target = (n // k) * k
+        cnt += (n - target)
+        n = target
 
-print(result) # 최종 답안 출력
+print(cnt)
