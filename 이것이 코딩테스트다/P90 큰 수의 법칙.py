@@ -48,3 +48,17 @@ result += (count)*first
 result += (m-count) * second
 
 print(result)
+
+
+# 0612 복습답안
+n, m, k = map(int, input().split())
+nums = list(map(int, input().split()))
+
+nums.sort(reverse=True)
+n1 = nums[0]
+n2 = nums[1]
+div = m // (k+1)
+res = m % (k+1)
+answer = (n1*k+n2)*div + (n1*res)
+
+print(answer)

@@ -21,3 +21,14 @@ for i in range(n):
     result = max(result, min_value)
 
 print(result) # 최종 답안 출력
+
+# 0612 복습답안
+n, m = map(int, input().split())
+answer = 0
+
+for _ in range(n):
+    tmp = list(map(int, input().split()))
+    minNum = min(tmp)
+    answer = max(answer, minNum)
+
+print(answer)
