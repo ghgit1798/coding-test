@@ -38,3 +38,26 @@ for step in steps:
         result += 1
 
 print(result)
+
+
+# 복습답안 0615
+cor = input()
+y, x = cor[0], cor[1]
+
+temp = ['a','b','c','d','e','f','g','h']
+for i in range(8):
+    if temp[i] == y:
+        y = i
+x = int(x)-1
+
+dx = [-2, -2, 2, 2, -1, 1, -1, 1]
+dy = [-1, 1, -1, 1, -2, -2, 2, 2]
+
+cnt = 0
+for i in range(8):
+    nx, ny = x+dx[i], y+dy[i]
+    if nx < 0 or ny < 0 or nx >= 8 or ny >= 8:
+        continue
+    cnt += 1
+
+print(cnt)

@@ -9,3 +9,17 @@ for i in range(h+1):
                 count += 1
 
 print(count)
+
+
+# 0615 복습
+n = int(input())
+answer = 0
+
+for i in range(n+1):
+    for j in range(60):
+        for k in range(60):
+            res = str(i)+str(j)+str(k)
+
+            if '3' in res:
+                answer += 1
+print(answer)
