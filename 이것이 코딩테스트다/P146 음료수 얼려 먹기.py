@@ -76,6 +76,7 @@ def bfs(graph, x, y):
 
     while queue:
         x, y = queue.popleft()
+
         for i in range(4):
             nx, ny = x+dx[i], y+dy[i]
             if nx<0 or ny<0 or nx>=n or ny>=m:
