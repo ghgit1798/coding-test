@@ -24,3 +24,19 @@ for name, score in student:
 # # 정렬이 수행된 결과를 출력
 # for student in array:
 #     print(student[0], end=' ')
+
+# 0625 복습답안
+n = int(input())
+std = []
+
+for _ in range(n):
+    name, score = input().split()
+    std.append([name, score])
+
+def setting(data):
+    return data[1]
+
+std = sorted(std, key=setting)
+
+for name, score in std:
+    print(name, end=' ')

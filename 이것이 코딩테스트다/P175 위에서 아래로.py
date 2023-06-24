@@ -22,3 +22,18 @@ for i in range(len(count)-1, -1, -1):
 # # 정렬이 수행된 결과를 출력
 # for i in array:
 #     print(i, end = ' ')
+
+# 0625 복습답안
+n = int(input())
+nums = [int(input()) for _ in range(n)]
+cnt = [0]*100001
+
+def count_sort(nums):
+    for num in nums:
+        cnt[num] += 1
+
+count_sort(nums)
+
+for i in range(100000, 0, -1):
+    if cnt[i]>0:
+        print(i, end=' ')
