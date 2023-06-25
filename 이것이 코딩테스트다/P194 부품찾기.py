@@ -78,3 +78,29 @@ for num in array2:
 #     else:
 #         print('no', end=' ')
 # 
+
+# 0626 복습답안
+def bs_search(array, target, start, end):
+    while start <= end:
+        mid = (start+end)//2
+        if array[mid] < target:
+            start = mid + 1
+        elif array[mid] > target:
+            end = mid - 1
+        else:
+            return mid
+    return None
+
+n = int(input())
+array = list(map(int, input().split()))
+m = int(input())
+x = list(map(int, input().split()))
+array = sorted(array)
+
+for target in x:
+    result = bs_search(array, target, 0, n-1)
+    if result == None:
+        print("no", end=' ')
+    else:
+        print("yes", end=' ')
+
