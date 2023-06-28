@@ -1,23 +1,9 @@
-n, m = map(int, input().split())
-array = list(map(int, input().split()))
-array = sorted(array)
-start, end = 0, max(array)
-answer, total = 0, 1e9
+n = int(input())
+dp = [0]*(n+1)
+dp[1] = 1
+dp[2] = 3
 
-while start <= end:
-    mid = (start+end)//2
-    target = 0
-    for num in array:
-        if num > mid:
-            target += (num - mid)
+for i in range(3, n+1):
+    dp[i] = (dp[i-1] + 2*dp[i-2]) % 796796
 
-    if target < m: # target이 더 작으면, 높이를 줄여야함
-        end = mid - 1
-    elif target > m: # target이 더 크면, 높이를 키워야함
-        start = mid + 1
-        answer = mid
-    else:
-        answer = mid
-        break
-
-print(answer)
+print(dp[n])
