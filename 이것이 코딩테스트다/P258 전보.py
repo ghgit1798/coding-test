@@ -88,3 +88,39 @@ for d in distance:
         max_distance = max(max_distance, d)
 
 print(count - 1, max_distance)
+
+# 0703 복습답안
+import heapq
+
+n, m, start = map(int, input().split())
+INF = int(1e9)
+graph = [[] for _ in range(n+1)]
+for _ in range(m):
+    a, b, dist = map(int, input().split())
+    graph[a].append((b, dist))
+
+distance = [INF]*(n+1)
+
+def dijkstra(start):
+    q = []
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+    while q:
+        dist, now = heapq.heappop(q)
+        if distance[now] < dist:
+            continue
+        for i in graph[now]:
+            cost = dist + i[1]
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q, (cost, i[0]))
+
+dijkstra(start)
+cnt = 0
+time = 0
+for i in range(n+1):
+    if distance[i] != INF:
+        cnt += 1
+        time = max(time, distance[i])
+
+print(cnt-1, time)

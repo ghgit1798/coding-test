@@ -1,35 +1,33 @@
-import heapq
+def find_parent(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
 
-n, m, c = map(int, input().split())
-INF = int(1e9)
-graph = [[] for _ in range(n+1)]
-distance = [INF]*(n+1)
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
 
-for _ in range(1, m+1):
-    a, b, dist = map(int, input().split())
-    graph[a].append((b, dist))
+v, e = map(int, input().split())
+parent = [0] * (v+1)
 
-def dijkstra(start):
-    q = []
-    heapq.heappush(q, (0, start))
-    distance[start] = 0
-    while q:
-        dist, now = heapq.heappop(q)
-        if distance[now] < dist:
-            continue
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+for i in range(1, v+1):
+    parent[i] = i
 
-dijkstra(c)
+cycle = False
 
-count = 0
-max_distance = 0
-for d in distance:
-    if d != INF:
-        count += 1
-        max_distance = max(max_distance, d)
+for i in range(e):
+    a, b = map(int, input().split())
+    if find_parent(parent, a) == find_parent(parent, b):
+        cycle = True
+        break
+    else:
+        union_parent(parent, a, b)
 
-print(count - 1, max_distance)
+if cycle:
+    print("사이클 발생")
+else:
+    print("사이클 발생 X")
