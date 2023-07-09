@@ -42,3 +42,28 @@ while start <= end:
         break
 
 print(answer)
+
+# 0709 복습답안
+n, m = map(int, input().split())
+array = list(map(int, input().split()))
+
+h = 0
+start, end = 0, max(array)
+
+while start <= end:
+    total = 0
+    mid = (start+end)//2
+    for num in array:
+        if num > mid:
+            total = total + (num - mid)
+
+    if total > m:
+        start = mid + 1
+        h = mid
+    elif total < m:
+        end = mid - 1
+    else:
+        h = mid
+        break
+
+print(h)

@@ -48,3 +48,36 @@ while True:
         turn_time = 0
 
 print(cnt)
+
+
+# 0709 복습답안
+n, m = map(int, input().split())
+x, y, dir = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(n)]
+visited = [[0]*m for _ in range(n)]
+visited[x][y], cnt = 1, 1
+
+dx = [-1, 0, 1, 0] # 북 서 남 동
+dy = [0, -1, 0, 1]
+
+turn_time = 0
+while True:
+    dir = (dir+1)%4
+    nx, ny = x + dx[dir], y + dy[dir]
+    if visited[nx][ny] == 0 and graph[nx][ny] == 0:
+        visited[nx][ny] = 1
+        x, y = nx, ny
+        cnt += 1
+        turn_time = 0
+    else:
+        turn_time += 1
+
+    if turn_time == 4:
+        nx, ny = x - dx[dir], y - dy[dir]
+        if graph[nx][ny] == 0:
+            x, y = nx, ny
+            turn_time = 0
+        else:
+            break
+
+print(cnt)
