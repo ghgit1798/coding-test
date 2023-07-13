@@ -1,13 +1,16 @@
+from collections import deque
+
+
 def solution(s):
     answer = len(s)
     mid = len(s) // 2
 
-    for step in range(1, mid + 1):
+    for i in range(1, mid + 1):
         cnt = 1
         temp = ""
-        prev = s[:step]
-        for j in range(step, len(s), step):
-            now = s[j:j + step]
+        prev = s[:i]
+        for j in range(i, len(s), i):
+            now = s[j:j + i]
 
             if prev == now:
                 cnt += 1
@@ -17,5 +20,7 @@ def solution(s):
                 cnt = 1
 
         temp += str(cnt) + prev if cnt >= 2 else prev
-        answer = min(answer, len(temp))
+
+        if len(temp) < answer:
+            answer = len(temp)
     return answer
