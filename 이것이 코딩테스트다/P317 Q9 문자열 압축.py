@@ -1,6 +1,5 @@
 from collections import deque
 
-
 def solution(s):
     answer = len(s)
     mid = len(s) // 2
