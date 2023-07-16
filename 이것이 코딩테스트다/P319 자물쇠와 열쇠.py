@@ -2,7 +2,7 @@
 def rotate_a_matrix_by_90_degree(a):
     n = len(a) # 행 길이 계산
     m = len(a[0]) # 열 길이 계산
-    result = [[0]*n for _ in range(m)] # 결과 리스트
+    result = [[0]*m for _ in range(n)] # 결과 리스트
     for r in range(n):
         for c in range(m):
             result[c][n-1-r] = a[r][c]
