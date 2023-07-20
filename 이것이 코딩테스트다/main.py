@@ -1,29 +1,22 @@
-from itertools import combinations
+from itertools import permutations
 
-n, m = map(int, input().split())
-graph = [list(map(int, input().split())) for _ in range(n)]
-chicken, house = [], []
-
-for r in range(n):
-    for c in range(n):
-        if graph[r][c] == 1:
-            house.append((r,c))
-        elif graph[r][c] == 2:
-            chicken.append((r,c))
-
-def get_sum(candidate):
-    result = 0
-    for hx, hy in house:
-        dist = 1e9
-        for cx, cy in candidate:
-            dist = min(dist, abs(hx-cx)+abs(hy-cy))
-        result = result + dist
-    return result
-
-candidates = list(combinations(chicken, m))
-
-result = 1e9
-for candidate in candidates:
-    result = min(result, get_sum(candidate))
-
-print(result)
+def solution(n, weak, dist):
+    # 길이를 2배로 늘려서 '원형'을 일자 형태로 변형
+    length = len(weak)
+    for i in range(length):
+        weak.append(weak[i]+n)
+    answer = len(dist) + 1
+    for start in range(length):
+        for friends in list(permutations(dist, len(dist))):
+            count = 1 # 투입할 친구의 수
+            position = weak[start] + friends[count-1]
+            for i in range(start, start+length):
+                if position < weak[i]:
+                    count += 1
+                    if count > len(dist):
+                        break
+                    position = weak[i] + friends[count-1]
+            answer = min(answer, count)
+    if answer > len(dist):
+        return -1
+    return answer
