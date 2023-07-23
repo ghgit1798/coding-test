@@ -8,7 +8,8 @@ graph = [list(map(int, input().split())) for _ in range(n)]
 dx = [0,0,-1,1]     # 동서남북
 dy = [1,-1,0,0]
 
-virus, empty = [], []
+virus = []
+empty = []
 for i in range(n):
     for j in range(m):
         if graph[i][j] == 2:
