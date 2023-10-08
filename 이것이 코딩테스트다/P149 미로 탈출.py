@@ -71,7 +71,6 @@ def bfs(graph, x, y):
     queue.append([x, y])
     visited[x][y] = 1
 
-    while queue:
         x, y = queue.popleft()
         for i in range(4):
             nx, ny = x+dx[i], y+dy[i]
