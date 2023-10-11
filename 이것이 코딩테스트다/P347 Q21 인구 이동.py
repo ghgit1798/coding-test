@@ -3,23 +3,19 @@ from collections import deque
 
 input = sys.stdin.readline
 
-dx, dy = [-1,1,0,0], [0,0,-1,1]
-
 n, l, r = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(n)]
-# visited_xy = [[0]*n for _ in range(n)]
+dx, dy = [-1,1,0,0], [0,0,-1,1]
 answer = 0
+index = 0
 
-def bfs(graph, x, y):
-    # 방문한 위치(x,y)를 저장하는 곳 필요 : 다 방문한 다음 n등분한 값을 저장해야함.
-
+def bfs(x, y, index):
     q = deque()
     visited_list = deque()
-    visited = [[0] * n for _ in range(n)]
 
     q.append([x, y])
     visited_list.append([x, y])
-    visited[x][y] = 1
+    union[x][y] = index
     total = graph[x][y]
 
     while q:
@@ -28,35 +24,32 @@ def bfs(graph, x, y):
             nx, ny = x+dx[i], y+dy[i]
             if nx<0 or ny<0 or nx>=n or ny>=n:
                 continue
-            if visited[nx][ny]:
-                continue
             diff = abs(graph[x][y] - graph[nx][ny])
-            if l <= diff <= r:
+            if l <= diff <= r and union[nx][ny] == -1:
                 total += graph[nx][ny]
-                visited[nx][ny] = 1
                 q.append([nx, ny])
                 visited_list.append([nx, ny])
+                union[nx][ny] = index
 
     result = total // len(visited_list)
-
 
     while visited_list:
         x, y = visited_list.popleft()
         graph[x][y] = result
 
-for x in range(n):
-    for y in range(n):
-        check = False
-        for k in range(4):
-            nx, ny = x + dx[k], y + dy[k]
-            if nx < 0 or ny < 0 or nx >= n or ny >= n:
-                continue
-            diff = abs(graph[x][y] - graph[nx][ny])
-            if l <= diff <= r:
-                check = True
+while True:
+    union = [[-1] * n for _ in range(n)]
+    index = 0
+    for i in range(n):
+        for j in range(n):
+            if union[i][j] == -1:
+                bfs(i, j, index)
+                index += 1
 
-        if check:
-            bfs(graph, x, y)
-            answer += 1
+    if index == n*n:
+        break
+
+    answer += 1
 
 print(answer)
+

@@ -1,52 +1,53 @@
+import sys
 from collections import deque
 
+input = sys.stdin.readline
+
 n, l, r = map(int, input().split())
+graph = [list(map(int, input().split())) for _ in range(n)]
+dx, dy = [-1,1,0,0], [0,0,-1,1]
+answer = 0
 
-graph = []
-for _ in range(n):
-    graph.append(list(map(int, input().split())))
-
-dx = [-1, 0, 1, 0]
-dy = [0, -1, 0, 1]
-
-result = 0
-
-def process(x, y, index):
-    united = []
-    united.append((x, y))
+def bfs(x, y, index):
     q = deque()
-    q.append((x, y))
+    visited_list = deque()
+    q.append([x, y])
+    visited_list.append([x, y])
+    total = graph[x][y]
     union[x][y] = index
-    summary = graph[x][y]
-    count = 1
+
     while q:
         x, y = q.popleft()
         for i in range(4):
             nx, ny = x+dx[i], y+dy[i]
-            if 0 <= nx < n and 0 <= ny < n and union[nx][ny] == -1:
-                if l <= abs(graph[nx][ny] - graph[x][y]) <= r:
-                    q.append((nx, ny))
-                    union[nx][ny] = index
-                    summary += graph[nx][ny]
-                    count += 1
-                    united.append((nx, ny))
+            if nx<0 or ny<0 or nx>=n or ny >=n:
+                continue
+            diff = abs(graph[x][y]-graph[nx][ny])
+            if l <= diff <= r and union[nx][ny] == -1:
+                q.append([nx, ny])
+                visited_list.append([nx, ny])
+                union[nx][ny] = index
+                total += graph[nx][ny]
 
-    for i, j in united:
-        graph[i][j] = summary // count
-    return count
+    result = total // len(visited_list)
 
-total_count = 0
+    while visited_list:
+        x, y = visited_list.popleft()
+        graph[x][y] = result
+
 
 while True:
-    union = [[-1]*n for _ in range(n)]
+    union = [[-1] * n for _ in range(n)]
     index = 0
     for i in range(n):
         for j in range(n):
             if union[i][j] == -1:
-                process(i, j, index)
+                bfs(i, j, union)
                 index += 1
+
     if index == n*n:
         break
-    total_count += 1
 
-print(total_count)
+    answer += 1
+
+print(answer)
