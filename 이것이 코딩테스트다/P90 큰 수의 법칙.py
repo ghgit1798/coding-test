@@ -62,3 +62,25 @@ res = m % (k+1)
 answer = (n1*k+n2)*div + (n1*res)
 
 print(answer)
+
+# 0909 복습답안
+import sys
+
+input = sys.stdin.readline
+
+n, m, k = map(int, input().split())
+num = list(map(int, input().split()))
+
+num = sorted(num, reverse=True)
+cnt = 0
+answer = 0
+
+for i in range(m):
+    if(cnt == k):
+        cnt = 0
+        answer += num[1]
+    else:
+        cnt += 1
+        answer += num[0]
+
+print(answer)
